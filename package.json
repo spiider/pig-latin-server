@@ -1,0 +1,41 @@
+{
+  "name": "pig-latin-server",
+  "version": "1.0.0",
+  "description": "RESTful server for PIG latin translate system.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist",
+    "dev": "nodemon -w src --exec \"babel-node src/index.js --presets latest\"",
+    "build": "babel src -s -D -d dist --presets latest",
+    "prestart": "npm run -s build",
+    "test": "mocha --require babel-polyfill --compilers js:babel-register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spiider/pig-latin-server.git"
+  },
+  "author": "Hélder Pereira <blackspiider.86@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/spiider/pig-latin-server/issues"
+  },
+  "homepage": "https://github.com/spiider/pig-latin-server#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.24.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-latest": "^6.24.0",
+    "babel-register": "^6.24.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0"
+  },
+  "engines": {
+    "node": ">= 5.0.0"
+  },
+  "dependencies": {
+    "express": "^4.15.2",
+    "sequelize": "^3.30.2",
+    "sqlite3": "^3.1.8"
+  }
+}
