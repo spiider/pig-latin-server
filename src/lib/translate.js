@@ -4,21 +4,29 @@ const VOWEL_PATTERN   = /[aeiou]/ig
 /*
   Basically, the Pig Latin system used here works as follows:
 
-  Words that start with a vowel (A, E, I, O, U) simply have "WAY" appended to the end of the word.
-  Words that start with a consonant have all consonant letters up to the first vowel moved to the end of the word (as opposed to just the first consonant letter), and "AY" is appended. ('Y' is counted as a vowel in this context)
+  √ Words that start with a vowel (A, E, I, O, U) simply have "WAY" appended to the end of the word.
+  √ Words that start with a consonant have all consonant letters up to the first vowel moved to the end of the word (as opposed to just the first consonant letter), and "AY" is appended. ('Y' is counted as a vowel in this context)
+
   The algorithm incorporates the following features and special case functionality:
 
   Ensures proper capitalization
   Correct upper case and lower case formatting
   Correctly translates "qu" (e.g., ietquay instead of uietqay)
-  Differentiates between "Y" as vowel and "Y" as consonant
-  (e.g. yellow = elloyay and style = ylestay) — (except for a very few exceptions)
+  √ Differentiates between "Y" as vowel and "Y" as consonant
+  √ (e.g. yellow = elloyay and style = ylestay) — (except for a very few exceptions)
   Correctly translates contractions
   Hyphenated words are treated as two words
   Words may consist of alphabetic characters only (A-Z and a-z)
   All punctuation, numerals, symbols and whitespace are not modified
 */
 
+/**
+ * Words that start with a consonant have all consonant letters up to the first
+ * vowel moved to the end of the word.
+ *
+ * @param  string word [description]
+ * @return Boolean       [description]
+ */
 const isConsoanant = (word) => {
   let haveQU = true
     , pos    = 0
@@ -32,7 +40,8 @@ const isConsoanant = (word) => {
   // Find how many consonants before the first vowel.
   while(haveQU) {
     idx = word.indexOf(word.match(Y_VOWEL_PATTERN)[pos]);
-    if(/qu/ig.test(word[idx-1]+word[idx].toLowerCase())) {
+    // check if the vowel is u and preview letter isn't qu
+    if(/qu/ig.test(word[idx-1]+word[idx])) {
       pos++;
     } else {
       haveQU = false;
@@ -43,7 +52,7 @@ const isConsoanant = (word) => {
 }
 
 /**
- * Check if word start with vowel and append way
+ * Check if word start with vowel and append "way"
  * @param  String word [description]
  * @return Boolean       [description]
  */
