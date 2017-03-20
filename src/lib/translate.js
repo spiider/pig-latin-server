@@ -41,11 +41,10 @@ const isConsoanant = (word) => {
   while(haveQU) {
     idx = word.indexOf(word.match(Y_VOWEL_PATTERN)[pos]);
     // check if the vowel is u and preview letter isn't qu
-    if(/qu/ig.test(word[idx-1]+word[idx])) {
-      pos++;
-    } else {
-      haveQU = false;
+    if(!/qu/ig.test(word[idx-1]+word[idx])) {
+      haveQU = false; // stop loop
     }
+    pos++;
   }
 
   return word.substr(idx) + word.substr(0, idx) + 'ay';
